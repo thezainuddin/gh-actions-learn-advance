@@ -1,0 +1,7 @@
+{  
+    "employee": {  
+        "name":       "john",   
+        "salary":      56000,   
+        "married":    true  
+    }  
+} 
