@@ -1,18 +1,21 @@
 name: Extract and code with Bash and python
-on: push
+on: [push]
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   extract-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      - name: Read data from test.md
-        id: python-script
-        uses: jannekem/run-python-script-action@v1
-        with:
-          script: |
-            print('hello')
+      - name: Extract current PR Number
+        run: |
+          echo PR_NUMBER=$(gh pr view --json number -q .number) >> $GITHUB_ENV
+      - name: Fetch file name that was changed
+        id: fetch-filename
+        run: |
+          echo "CHANGED_FILENAME=$(gh pr view $PR_NUMBER --json files --jq '.files.[].path'| grep -i '.md')" >> $GITHUB_ENV
+      - name: print
+        run: echo $CHANGED_FILENAME
+
 
 
