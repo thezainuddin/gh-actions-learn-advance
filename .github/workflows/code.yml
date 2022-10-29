@@ -17,7 +17,7 @@ jobs:
       - name: Fetch file name that was changed
         id: fetch-filename
         run: |
-
+          gh pr view 2
 
 
 
