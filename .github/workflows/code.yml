@@ -15,7 +15,7 @@ jobs:
       - name: Fetch file name that was changed
         id: fetch-filename
         run: |
-          echo "CHANGED_FILENAME = $(gh pr view 2 --json files --jq '.files.[].path'| grep -i '.md')" >> $GITHUB_ENV
+          echo "CHANGED_FILENAME=$(gh pr view 2 --json files --jq '.files.[].path'| grep -i '.md')">>$GITHUB_ENV
       - name: print
         run: echo $CHANGED_FILENAME
 
