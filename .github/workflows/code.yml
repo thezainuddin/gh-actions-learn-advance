@@ -1,5 +1,7 @@
 name: Extract and code with Bash and python
 on: [push]
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   extract-data:
     runs-on: ubuntu-latest
