@@ -10,12 +10,10 @@ jobs:
       - name: Extract current PR Number
         run: |
           echo PR_NUMBER=$(gh pr view --json number -q .number) >> $GITHUB_ENV
-      - name: print pr number
-        run: echo $PR_NUMBER  
       - name: Fetch file name that was changed
         id: fetch-filename
         run: |
-          echo "CHANGED_FILENAME=$(gh pr view 2 --json files --jq '.files.[].path'| grep -i '.md')">>$GITHUB_ENV
+          echo "CHANGED_FILENAME=$(gh pr view $PR_NUMBER --json files --jq '.files.[].path'| grep -i '.md')" >> $GITHUB_ENV
       - name: print
         run: echo $CHANGED_FILENAME
 
