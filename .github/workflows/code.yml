@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Extract current PR Number
+        run: |
+          echo "PR_NUMBER = $(gh pr view --json number -q .number)" >> $GITHUB_ENV
+      - name: print pr number
+        run: echo $PR_NUMBER  
       - name: Fetch file name that was changed
         id: fetch-filename
         run: |
